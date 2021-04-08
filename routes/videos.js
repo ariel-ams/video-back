@@ -20,12 +20,11 @@ router.get('/:videoId/file', (req, res) => {
 router.delete('/:videoId', (req, res) => {
     Video.findById(req.params.videoId, (err, doc)=>{
         let filePath = path.join(process.cwd(), doc.path);
-        let thumbName = 'thumbnails/' + path.basename(doc.thumbnail);
-        let thumbnail = path.join(process.cwd(), thumbName);
         fs.unlink(filePath, () => {
             
         });
-        console.log(thumbnail);
+        let thumbName = 'thumbnails/' + path.basename(doc.thumbnail);
+        let thumbnail = path.join(process.cwd(), thumbName);
         fs.unlink(thumbnail, () => {
             
         });
