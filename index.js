@@ -29,21 +29,17 @@ mongoose.connect(
 );
 
 var corsOptions = {
-  origin: 'http://localhost:8080',
+  origin: 'http://localhost:3001',
   optionsSuccessStatus: 200 // For legacy browser support
 }
 
 app.use(cors(corsOptions));
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Credentials', 'true');
+  //res.header('Access-Control-Allow-Credentials', 'true');
   next();
-});
-
-app.get("/", function (request, response) {
-  response.status(200).send("Welcome to login, sign-up api");
 });
 
 //api routes
@@ -52,8 +48,13 @@ app.post("/api/login", api.login);
 app.get("/api/logout", auth, api.logout);
 app.get("/api/photos", auth, api.photos);
 
-//create path to save the uploaded videos
+const uploadRoutes = require('./routes/upload');
+app.use("/api/upload", uploadRoutes);
 
+const videos = require('./routes/videos');
+app.use("/api/videos", videos);
+
+app.use(express.static(__dirname + '/thumbnails'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
