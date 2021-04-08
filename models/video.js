@@ -1,26 +1,32 @@
 var mongoose = require('mongoose');
 
 const videoSchema = mongoose.Schema({
-    user_id: {
-        required: true,
-    },
+    // user_id: {
+    //     required: true,
+    // },
     name: {
         type: String,
         required: true,
         maxlenght: 50
     },
-    codecAudio: {
-
+    audioCodec: {
+        type: String,
+        required: true,
     },
-    codecVideo: {
-
+    videoCodec: {
+        type: String,
+        required: true,
     },
     lenghtInSeconds:{
-
+        type: Number,
+    },
+    path:{
+        type: String,
+        required: true,
     },
     thumbnail: {
         type: String,
-        required: true,
+        //required: true,
         maxlenght: 250
     }
 });
