@@ -22,7 +22,6 @@ router.post('/video', upload, (req, res) => {
 
     getVideoInfoAndMiddleFrame(req.file.path)
         .then(({videoInfo, filename}) => {
-            console.log(videoInfo);
             var video = new Video({
                 name: path.parse(req.file.originalname).name,
                 path: req.file.path,
@@ -78,7 +77,6 @@ const getVideoInfoAndMiddleFrame = (
             filename: '%b-%s.png',
             folder: uploadFolder
         }).on('filenames', function(filenames){
-            console.log(filenames);
             resolve({videoInfo, filename: filenames[0]})
         })
         .on('error', reject);

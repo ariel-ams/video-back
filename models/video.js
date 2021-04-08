@@ -26,7 +26,7 @@ const videoSchema = mongoose.Schema({
     },
     thumbnail: {
         type: String,
-        //required: true,
+        required: true,
         maxlenght: 250
     }
 });
